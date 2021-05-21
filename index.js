@@ -41,30 +41,48 @@ const pagination = async () => {
   const prev = document.querySelector("#prev");
 
   next.addEventListener("click", async () => {
-    page += 1;
-
-    // Se elimina el contenido de la columna de la grilla de Bootstrap, para refrescar al cambiar de página
-    const divColElement = document.querySelector("div.col");
-    divColElement.remove();
+    // Se elimina el contenido de las columnas de la grilla de Bootstrap, para refrescar al cambiar de página
+    const nodeList = document.querySelectorAll("div.col");
+    nodeList.forEach((e) => {
+      e.remove();
+    });
 
     const data = await getData(
       `https://rickandmortyapi.com/api/character?page=${page}`
     );
-    console.log(`https://rickandmortyapi.com/api/character?page=${page}`);
+
     const API_URL = data.info.next;
     printData(API_URL);
+
+    page += 1;
+
+    // Habilitar el botón de "Anterior" cuando se ubica en la página 2 o superior
+    if (page > 1) {
+      const prevElement = document.querySelector("#prev");
+      prevElement.className = "page-item";
+    }
   });
 
   prev.addEventListener("click", async () => {
-    page -= 1;
-    const divColElement = document.querySelector("div.col");
-    divColElement.remove();
+    // Se elimina el contenido de las columnas de la grilla de Bootstrap, para refrescar al cambiar de página
+    const nodeList = document.querySelectorAll("div.col");
+    nodeList.forEach((e) => {
+      e.remove();
+    });
 
     const data = await getData(
       `https://rickandmortyapi.com/api/character?page=${page}`
     );
     const API_URL = data.info.prev;
     printData(API_URL);
+
+    page -= 1;
+
+    // Habilitar el botón de "Anterior" cuando se ubica en la página 2 o superior
+    if (page > 1) {
+      const prevElement = document.querySelector("#prev");
+      prevElement.className = "page-item";
+    }
   });
 };
 
