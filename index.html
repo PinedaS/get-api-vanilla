@@ -28,23 +28,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#"
-                >Personajes</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#"
-                >Ubicaciones</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#"
-                >Episodios</a
-              >
-            </li>
-          </ul>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
           <form class="d-flex">
             <input
               class="form-control me-2"
@@ -61,19 +45,15 @@
 
     <section class="container">
       <div class="row"></div>
-      
-      <nav aria-label="...">
-        <ul class="pagination">
-          <li class="page-item disabled" id="prev">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
-              >Anterior</a
-            >
-          </li>
-          <li class="page-item" id="next">
-            <a class="page-link" href="#">Siguiente</a>
-          </li>
-        </ul>
-      </nav>
+
+      <div class="btn-group" role="group" aria-label="Basic outlined example">
+        <button type="button" class="btn btn-outline-primary" id="prev">
+          Anterior
+        </button>
+        <button type="button" class="btn btn-outline-primary" id="next">
+          Siguiente
+        </button>
+      </div>
     </section>
 
     <script
