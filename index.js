@@ -55,7 +55,7 @@ const pagination = async () => {
       e.remove();
     });
 
-    printData("https://rickandmortyapi.com/api/character");
+    main();
   });
 
   next.addEventListener("click", async () => {
@@ -104,10 +104,64 @@ const pagination = async () => {
   });
 };
 
-const main = () => {
-  printData("https://rickandmortyapi.com/api/character");
+const search = async (API_URL) => {
+  const searchButton = document.querySelector(".btn-outline-success");
+  const data = await getData(API_URL);
+  let characters = [];
 
+  data.results.forEach((c) => {
+    characters.push(c);
+  });
+
+  searchButton.addEventListener("click", () => {
+    const formValue = document.forms[0].elements[0].value;
+
+    characters.forEach((c) => {
+      if (c.name == formValue) {
+        // Eliminamos todo el contenido
+        const nodeList = document.querySelectorAll("div.col");
+        const buttonsBottom = document.querySelector(".btn-group"); // Botones de Anterior y Siguiente
+
+        nodeList.forEach((e) => {
+          e.remove();
+        });
+
+        buttonsBottom.remove();
+
+        // Se muestra el personaje que se intenta buscar
+        const divElement = document.createElement("div");
+        divElement.className = "col";
+        const rowElement = document.querySelector("div.row");
+
+        const name = c.name;
+        const specie = c.species;
+        const gender = c.gender;
+        const location = c.location.name;
+        const image = c.image;
+
+        divElement.innerHTML = `
+        <div class="card" style="width: 18rem;">
+          <img src="${image}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">${name}</h5>
+            <p class="card-text">Especie: ${specie}</p>
+            <p class="card-text">Género: ${gender}</p>
+            <p class="card-text">Ubicación: ${location}</p>
+          </div>
+        </div>`;
+
+        rowElement.append(divElement);
+      }
+    });
+  });
+};
+
+const main = () => {
+  const API_URL = "https://rickandmortyapi.com/api/character";
+
+  printData(API_URL);
   pagination();
+  search(API_URL);
 };
 
 main();
