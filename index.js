@@ -106,12 +106,17 @@ const pagination = async () => {
 
 const search = async (API_URL) => {
   const searchButton = document.querySelector(".btn-outline-success");
-  const data = await getData(API_URL);
+  const form = document.querySelector(".form-control");
+  let data = await getData(API_URL);
   let characters = [];
 
-  data.results.forEach((c) => {
-    characters.push(c);
-  });
+  // Guardar todos los personajes en el Array characters
+  for (let i = 0; i < 33; i++) {
+    data.results.forEach((c) => {
+      characters.push(c);
+    });
+    data = await getData(data.info.next);
+  }
 
   searchButton.addEventListener("click", () => {
     const formValue = document.forms[0].elements[0].value;
@@ -125,7 +130,7 @@ const search = async (API_URL) => {
         nodeList.forEach((e) => {
           e.remove();
         });
-
+        
         buttonsBottom.remove();
 
         // Se muestra el personaje que se intenta buscar
